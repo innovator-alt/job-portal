@@ -8,7 +8,7 @@ import {
   observeAuth,
 } from "../services/authService";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -32,8 +32,13 @@ function AuthProvider({ children }) {
   const googleLogin = () =>
     loginWithGoogle();
 
-  const logout = () =>
-    logoutUser();
+  const logout = async () => {
+    await logoutUser();
+
+    // Clear local auth state immediately.
+    // Firebase onAuthStateChanged will also update it.
+    setUser(null);
+  };
 
   const resetPassword = (email) =>
     forgotPassword(email);

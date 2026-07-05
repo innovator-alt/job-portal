@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import Badge from "../ui/Badge";
 
 function JobCard({
+  id,
   company,
   title,
   location,
@@ -9,7 +11,7 @@ function JobCard({
 }) {
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <h4 className="text-blue-600 font-semibold">
+      <h4 className="font-semibold text-blue-600">
         {company}
       </h4>
 
@@ -23,9 +25,12 @@ function JobCard({
         <Badge>{type}</Badge>
       </div>
 
-      <button className="mt-6 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700">
+      <Link
+        to={`/jobs/${id}`}
+        className="mt-6 block rounded-lg bg-blue-600 py-3 text-center font-semibold text-white hover:bg-blue-700"
+      >
         View Details
-      </button>
+      </Link>
     </div>
   );
 }
